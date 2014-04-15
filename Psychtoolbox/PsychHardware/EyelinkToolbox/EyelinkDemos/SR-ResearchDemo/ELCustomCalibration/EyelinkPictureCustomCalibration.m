@@ -413,7 +413,8 @@ catch
     %this "catch" section executes in case of an error in the "try" section
     %above.  Importantly, it closes the onscreen window if its open.
     cleanup;
-    
+    rethrow(lasterror);
+
 end %try..catch.
 
 

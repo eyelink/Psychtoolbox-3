@@ -87,8 +87,6 @@ try
 
     % the following code is used to check the version of the eye tracker
     % and version of the host software
-    sw_version = 0;
-
     [v vs]=Eyelink('GetTrackerVersion');
     fprintf('Running experiment on a ''%s'' tracker.\n', vs );
 
@@ -123,7 +121,7 @@ try
 
     % check the software version
     % add "HTARGET" to record possible target data for EyeLink Remote
-    if sw_version >=4
+    if sscanf(vs,'EYELINK CL %f') >=4
         Eyelink('command', 'file_sample_data  = LEFT,RIGHT,GAZE,HREF,AREA,HTARGET,GAZERES,STATUS,INPUT');
         Eyelink('command', 'link_sample_data  = LEFT,RIGHT,GAZE,GAZERES,AREA,HTARGET,STATUS,INPUT');
     else
@@ -373,7 +371,7 @@ catch
       Eyelink('ShutDown');
       Screen('CloseAll');
 %      commandwindow;
-%      rethrow(lasterr);
+      rethrow(lasterr);
 end %try..catch.
 
 
